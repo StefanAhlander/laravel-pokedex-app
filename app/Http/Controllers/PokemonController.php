@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\PokemonApiService;
+use App\Pokemon;
 
 
 class PokemonController extends Controller
@@ -35,6 +36,20 @@ class PokemonController extends Controller
     public function show($id)
     {
         $pokemon = json_decode(PokemonApiService::getInstance()->getById($id));
+
+        if (!Pokemon::where('name', $pokemon->name)->first()) {
+            $newPokemon = Pokemon::create([
+                "name" => $pokemon->name,
+                "abilities" => json_encode($pokemon->abilities),
+                "stats" => json_encode($pokemon->stats),
+            ]);
+
+            try {
+                $newPokemon->save();
+            } catch (\Throwable $e) {
+                print("Error: " . $e);
+            }
+        }
         return view('show', compact('pokemon'));
     }
 }
