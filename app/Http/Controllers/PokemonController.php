@@ -28,7 +28,7 @@ class PokemonController extends Controller
      */
     public function show($id)
     {
-        $pokemons = json_decode(PokemonApiService::getInstance()->getById($id));
-        return view('show', compact('pokemons'));
+        $pokemon = json_decode(PokemonApiService::getInstance()->getById($id));
+        return view('show', compact('pokemon'));
     }
 }

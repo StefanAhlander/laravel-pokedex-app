@@ -27,9 +27,8 @@
     </div>
   </header>
 
-  <div class="container-fluid" style="display: flex; flex-wrap: wrap; justify-content: space-between; padding-bottom: 4rem">
-    @yield ('content')
-  </div>
+
+  @yield ('content')
 
   <footer class='footer bg-light'>
     <p>2020 Stefan Åhlander</p>
