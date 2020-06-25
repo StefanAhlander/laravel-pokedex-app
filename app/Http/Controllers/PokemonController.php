@@ -37,19 +37,8 @@ class PokemonController extends Controller
     {
         $pokemon = json_decode(PokemonApiService::getInstance()->getById($id));
 
-        if (!Pokemon::where('name', $pokemon->name)->first()) {
-            $newPokemon = Pokemon::create([
-                "name" => $pokemon->name,
-                "abilities" => json_encode($pokemon->abilities),
-                "stats" => json_encode($pokemon->stats),
-            ]);
+        Pokemon::saveIfNew($pokemon);
 
-            try {
-                $newPokemon->save();
-            } catch (\Throwable $e) {
-                print("Error: " . $e);
-            }
-        }
         return view('show', compact('pokemon'));
     }
 }
