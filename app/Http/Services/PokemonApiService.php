@@ -22,9 +22,10 @@ class PokemonApiService
     return self::$instance;
   }
 
-  public function get()
+  public function get($queryString)
   {
-    return $this->client->request('GET', 'pokemon')->getBody()->getContents();
+    $uri = "pokemon" . $queryString;
+    return $this->client->request('GET', $uri)->getBody()->getContents();
   }
 
   public function getById($id)

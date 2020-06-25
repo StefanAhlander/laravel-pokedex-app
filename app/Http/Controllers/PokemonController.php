@@ -14,9 +14,15 @@ class PokemonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pokemons = json_decode(PokemonApiService::getInstance()->get());
+        $queryString = "";
+        if ($request->has('offset')) {
+            $offset = $request->get('offset');
+            $queryString .= "?offset=" . $offset . "&limit=20";
+        }
+
+        $pokemons = json_decode(PokemonApiService::getInstance()->get($queryString));
         return view('index', compact('pokemons'));
     }
 

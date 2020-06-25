@@ -21,7 +21,9 @@
 <body>
   <header>
     <div class="jumbotron">
-      <h1 class="display-3">Pokedex</h1>
+      <a href="pokemon">
+        <h1 class="display-3">Pokedex</h1>
+      </a>
       <p class="lead">All amazing pokemons in one place</p>
       <hr class="my-2">
     </div>
